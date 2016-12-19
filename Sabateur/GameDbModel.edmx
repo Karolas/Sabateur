@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GameDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CardSet">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="BlockType" Type="int" />
+          <Property Name="PathOpenings" Type="int" />
+          <Property Name="Path" Type="int" />
+          <Property Name="FieldCol" Type="int" />
+          <Property Name="FieldRow" Type="int" />
+          <Property Name="IsPathUpside" Type="bit" />
+        </EntityType>
+        <EntityType Name="PlayerSet">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="IsTurn" Type="bit" Nullable="false" />
+          <Property Name="Score" Type="smallint" Nullable="false" />
+          <Property Name="Blocks" Type="int" />
+          <Property Name="IsSabateur" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_PlayerCard">
+          <End Role="PlayerSet" Type="Self.PlayerSet" Multiplicity="1" />
+          <End Role="CardSet" Type="Self.CardSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerSet">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="CardSet">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GameDBModelStoreContainer">
+          <EntitySet Name="CardSet" EntityType="Self.CardSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlayerSet" EntityType="Self.PlayerSet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PlayerCard" Association="Self.FK_PlayerCard">
+            <End Role="PlayerSet" EntitySet="PlayerSet" />
+            <End Role="CardSet" EntitySet="CardSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GameDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CardSet">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="GameDBModel.CardType" Nullable="false" />
+          <Property Name="Owner" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PlayerSet" Relationship="Self.FK_PlayerCard" FromRole="CardSet" ToRole="PlayerSet" />
+          <Property Name="BlockType" Type="GameDBModel.BlockType" Nullable="true" />
+          <Property Name="PathOpenings" Type="GameDBModel.Direction" Nullable="true" />
+          <Property Name="Path" Type="GameDBModel.Direction" Nullable="true" />
+          <Property Name="FieldCol" Type="Int32" Nullable="true" />
+          <Property Name="FieldRow" Type="Int32" Nullable="true" />
+          <Property Name="IsPathUpside" Type="Boolean" Nullable="true" />
+        </EntityType>
+        <EntityType Name="PlayerSet">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsTurn" Type="Boolean" Nullable="false" />
+          <Property Name="Score" Type="Int16" Nullable="false" />
+          <Property Name="Blocks" Type="GameDBModel.BlockType" Nullable="true" />
+          <NavigationProperty Name="CardSet" Relationship="Self.FK_PlayerCard" FromRole="PlayerSet" ToRole="CardSet" />
+          <Property Name="IsSabateur" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_PlayerCard">
+          <End Role="PlayerSet" Type="Self.PlayerSet" Multiplicity="1" />
+          <End Role="CardSet" Type="Self.CardSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerSet">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="CardSet">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GameDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CardSet" EntityType="Self.CardSet" />
+          <EntitySet Name="PlayerSet" EntityType="Self.PlayerSet" />
+          <AssociationSet Name="FK_PlayerCard" Association="Self.FK_PlayerCard">
+            <End Role="PlayerSet" EntitySet="PlayerSet" />
+            <End Role="CardSet" EntitySet="CardSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EnumType Name="BlockType" IsFlags="true">
+          <Member Name="Cart" Value="1" />
+          <Member Name="Pickaxe" Value="2" />
+          <Member Name="Lantern" Value="4" />
+        </EnumType>
+        <EnumType Name="CardStatus">
+          <Member Name="InDeck" />
+          <Member Name="OnField" />
+          <Member Name="Discarded" />
+          <Member Name="InHand" />
+        </EnumType>
+        <EnumType Name="CardType">
+          <Member Name="Path" />
+          <Member Name="Block" />
+          <Member Name="Map" />
+          <Member Name="RemovePath" />
+          <Member Name="AntiBlock" />
+          <Member Name="GoalPath" />
+        </EnumType>
+        <EnumType Name="Direction" IsFlags="true">
+          <Member Name="Up" Value="1" />
+          <Member Name="Down" Value="2" />
+          <Member Name="Left" Value="4" />
+          <Member Name="Right" Value="8" />
+        </EnumType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GameDBModelStoreContainer" CdmEntityContainer="GameDBEntities">
+    <EntitySetMapping Name="CardSet">
+      <EntityTypeMapping TypeName="IsTypeOf(GameDBModel.CardSet)">
+        <MappingFragment StoreEntitySet="CardSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="BlockType" ColumnName="BlockType" />
+          <ScalarProperty Name="PathOpenings" ColumnName="PathOpenings" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="FieldCol" ColumnName="FieldCol" />
+          <ScalarProperty Name="FieldRow" ColumnName="FieldRow" />
+          <ScalarProperty Name="IsPathUpside" ColumnName="IsPathUpside" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlayerSet">
+      <EntityTypeMapping TypeName="IsTypeOf(GameDBModel.PlayerSet)">
+        <MappingFragment StoreEntitySet="PlayerSet">
+          <ScalarProperty Name="IsSabateur" ColumnName="IsSabateur" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsTurn" ColumnName="IsTurn" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="Blocks" ColumnName="Blocks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
