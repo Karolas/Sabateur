@@ -161,7 +161,15 @@ namespace Sabateur
 
         private void ButtonChangeName_Click(object sender, EventArgs e)
         {
-            Game.Player.Name = TextBoxName.Text;
+            if(ListBoxPlayers.SelectedItem != null)
+            {
+                Game.Player.Name = (string)ListBoxPlayers.SelectedItem;
+            }
+            else
+            {
+                Game.Player.Name = TextBoxName.Text;
+            }
+            
             Game.Player.IsTurn = false;
 
             if(Game.SqlWorker.ConnectionStatus() == ConnectionState.Open)

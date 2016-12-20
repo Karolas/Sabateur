@@ -14,7 +14,11 @@ namespace Sabateur
         {
             HideControls();
             ShowField();
-            Invoke(CardSelectMethods[Game.Player.SelectedCard.Type]);
+
+            if(CardSelectMethods.ContainsKey(Game.Player.SelectedCard.Type))
+            {
+                Invoke(CardSelectMethods[Game.Player.SelectedCard.Type]);
+            }
         }
 
         private void ShowHand()

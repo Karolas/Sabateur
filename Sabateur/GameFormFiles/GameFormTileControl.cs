@@ -28,7 +28,10 @@ namespace Sabateur
         }
         private void FieldTile_Click(object sender, EventArgs e)
         {
-            Invoke(TileSelectMethods[Game.Player.SelectedCard.Type], sender);
+            if (TileSelectMethods.ContainsKey(Game.Player.SelectedCard.Type))
+            {
+                Invoke(TileSelectMethods[Game.Player.SelectedCard.Type], sender);
+            }
         }
         private void InitializeFieldTiles()
         {
