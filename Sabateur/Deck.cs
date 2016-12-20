@@ -8,8 +8,8 @@ namespace Sabateur
 {
     static class Deck
     {
-        private static CardSet startCard = SetStartCard(41);
-        private static CardSet[] goalCards = SetGoalCards(41, 42, 43);
+        private static CardSet startCard = SetStartCard(71);
+        private static CardSet[] goalCards = SetGoalCards(68, 69, 70);
         public static CardSet[] Cards { get; private set; } =
         {
             PrepareCard(1, CardType.Path, null, Direction.Up | Direction.Down, Direction.Up | Direction.Down),
@@ -56,33 +56,33 @@ namespace Sabateur
             goalCards[0],
             goalCards[1],
             goalCards[2],
-            PrepareCard(1, CardType.Block, BlockType.Cart),
-            PrepareCard(2, CardType.Block, BlockType.Cart),
-            PrepareCard(3, CardType.Block, BlockType.Cart),
-            PrepareCard(4, CardType.Block, BlockType.Pickaxe),
-            PrepareCard(5, CardType.Block, BlockType.Pickaxe),
-            PrepareCard(6, CardType.Block, BlockType.Pickaxe),
-            PrepareCard(7, CardType.Block, BlockType.Lantern),
-            PrepareCard(8, CardType.Block, BlockType.Lantern),
-            PrepareCard(9, CardType.Block, BlockType.Lantern),
-            PrepareCard(1, CardType.AntiBlock, BlockType.Cart),
-            PrepareCard(2, CardType.AntiBlock, BlockType.Cart),
-            PrepareCard(3, CardType.AntiBlock, BlockType.Cart | BlockType.Pickaxe),
-            PrepareCard(4, CardType.AntiBlock, BlockType.Pickaxe),
-            PrepareCard(5, CardType.AntiBlock, BlockType.Pickaxe),
-            PrepareCard(6, CardType.AntiBlock, BlockType.Pickaxe | BlockType.Lantern),
-            PrepareCard(7, CardType.AntiBlock, BlockType.Lantern),
-            PrepareCard(8, CardType.AntiBlock, BlockType.Lantern),
-            PrepareCard(9, CardType.AntiBlock, BlockType.Lantern | BlockType.Cart),
-            PrepareCard(1, CardType.Map),
-            PrepareCard(2, CardType.Map),
-            PrepareCard(3, CardType.Map),
-            PrepareCard(4, CardType.Map),
-            PrepareCard(5, CardType.Map),
-            PrepareCard(6, CardType.Map),
-            PrepareCard(1, CardType.RemovePath),
-            PrepareCard(2, CardType.RemovePath),
-            PrepareCard(3, CardType.RemovePath),
+            PrepareCard(41, CardType.Block, BlockType.Cart),
+            PrepareCard(42, CardType.Block, BlockType.Cart),
+            PrepareCard(43, CardType.Block, BlockType.Cart),
+            PrepareCard(44, CardType.Block, BlockType.Pickaxe),
+            PrepareCard(45, CardType.Block, BlockType.Pickaxe),
+            PrepareCard(46, CardType.Block, BlockType.Pickaxe),
+            PrepareCard(47, CardType.Block, BlockType.Lantern),
+            PrepareCard(48, CardType.Block, BlockType.Lantern),
+            PrepareCard(49, CardType.Block, BlockType.Lantern),
+            PrepareCard(50, CardType.AntiBlock, BlockType.Cart),
+            PrepareCard(51, CardType.AntiBlock, BlockType.Cart),
+            PrepareCard(52, CardType.AntiBlock, BlockType.Cart | BlockType.Pickaxe),
+            PrepareCard(53, CardType.AntiBlock, BlockType.Pickaxe),
+            PrepareCard(54, CardType.AntiBlock, BlockType.Pickaxe),
+            PrepareCard(55, CardType.AntiBlock, BlockType.Pickaxe | BlockType.Lantern),
+            PrepareCard(56, CardType.AntiBlock, BlockType.Lantern),
+            PrepareCard(57, CardType.AntiBlock, BlockType.Lantern),
+            PrepareCard(58, CardType.AntiBlock, BlockType.Lantern | BlockType.Cart),
+            PrepareCard(59, CardType.Map),
+            PrepareCard(60, CardType.Map),
+            PrepareCard(61, CardType.Map),
+            PrepareCard(62, CardType.Map),
+            PrepareCard(63, CardType.Map),
+            PrepareCard(64, CardType.Map),
+            PrepareCard(65, CardType.RemovePath),
+            PrepareCard(66, CardType.RemovePath),
+            PrepareCard(67, CardType.RemovePath),
         };
 
         private static CardSet PrepareCard(int id, CardType type, BlockType? blockType = null, Direction? opening = null, Direction? path = null)

@@ -384,6 +384,54 @@ namespace Sabateur
             return false;
         }
 
+        public static void CheckGoalCardReached(CardSet putCard)
+        {
+            CardSet[] goalCards = Game.Cards.Where(card => card.Type == CardType.GoalPath).ToArray();
+
+            for (int i = 0; i < goalCards.Count(); i++)
+            {
+                if (IsCardNextToGoal(putCard, goalCards[i]))
+                {
+                    if (goalCards[i].Path == (Direction.Down | Direction.Left | Direction.Right | Direction.Up)) System.Windows.Forms.Application.Exit();
+                    else
+                    {
+                        goalCards[i].Type = CardType.Path;
+                    }
+                    SqlWorker.SaveData();
+                }
+            }
+        }
+
+        private static bool IsCardNextToGoal(CardSet putCard, CardSet goalCard)
+        {
+            int colDif = (int)putCard.FieldCol - (int)goalCard.FieldCol;
+            int rowDif = (int)putCard.FieldRow - (int)goalCard.FieldRow;
+            if (Math.Abs(colDif) + Math.Abs(rowDif) == 1)
+            {
+                if(rowDif == 1)
+                {
+                    if (putCard.Path.Value.HasFlag(Direction.Up) && putCard.IsPathUpside == false) return true;
+                    if (putCard.Path.Value.HasFlag(Direction.Down) && putCard.IsPathUpside == true) return true;
+                }
+                if (rowDif == -1)
+                {
+                    if (putCard.Path.Value.HasFlag(Direction.Down) && putCard.IsPathUpside == false) return true;
+                    if (putCard.Path.Value.HasFlag(Direction.Up) && putCard.IsPathUpside == true) return true;
+                }
+                if (colDif == 1)
+                {
+                    if (putCard.Path.Value.HasFlag(Direction.Left) && putCard.IsPathUpside == false) return true;
+                    if (putCard.Path.Value.HasFlag(Direction.Right) && putCard.IsPathUpside == true) return true;
+                }
+                if (colDif == -1)
+                {
+                    if (putCard.Path.Value.HasFlag(Direction.Right) && putCard.IsPathUpside == false) return true;
+                    if (putCard.Path.Value.HasFlag(Direction.Left) && putCard.IsPathUpside == true) return true;
+                }
+            }
+            return false;
+        }
+
         private bool IsCardOnTile(IQueryable<CardSet> fieldCards, int row, int col)
         {
             return fieldCards.Where(card => card.FieldCol == row && card.FieldRow == col).Count() > 0;

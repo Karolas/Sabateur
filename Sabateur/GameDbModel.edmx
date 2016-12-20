@@ -8,7 +8,6 @@
         <EntityType Name="CardSet">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="Type" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
@@ -57,7 +56,6 @@
         <EntityType Name="CardSet">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="Type" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="GameDBModel.CardType" Nullable="false" />

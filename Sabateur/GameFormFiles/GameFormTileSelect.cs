@@ -37,6 +37,7 @@ namespace Sabateur
                         Game.Player.SelectedCard.FieldCol = availableSpots[i][0];
                         Game.Player.SelectedCard.FieldRow = availableSpots[i][1];
                         Game.Player.SelectedCard.Owner = "Field";
+                        Game.CheckGoalCardReached(Game.Player.SelectedCard);
                         EndTurn();
                         break;
                     }
