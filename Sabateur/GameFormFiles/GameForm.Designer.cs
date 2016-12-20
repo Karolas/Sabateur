@@ -98,6 +98,7 @@ namespace Sabateur
             this.ButtonChangeName = new System.Windows.Forms.Button();
             this.ListBoxPlayers = new System.Windows.Forms.ListBox();
             this.ButtonEndTurn = new System.Windows.Forms.Button();
+            this.LabelSaboteur = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.playerSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gameDBDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardSetBindingSource)).BeginInit();
@@ -707,11 +708,20 @@ namespace Sabateur
             this.ButtonEndTurn.Visible = false;
             this.ButtonEndTurn.Click += new System.EventHandler(this.ButtonEndTurn_Click);
             // 
+            // LabelSaboteur
+            // 
+            this.LabelSaboteur.AutoSize = true;
+            this.LabelSaboteur.Location = new System.Drawing.Point(921, 586);
+            this.LabelSaboteur.Name = "LabelSaboteur";
+            this.LabelSaboteur.Size = new System.Drawing.Size(0, 13);
+            this.LabelSaboteur.TabIndex = 71;
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Controls.Add(this.LabelSaboteur);
             this.Controls.Add(this.ButtonEndTurn);
             this.Controls.Add(this.ListBoxPlayers);
             this.Controls.Add(this.ButtonChangeName);
@@ -906,6 +916,7 @@ namespace Sabateur
         private System.Windows.Forms.Button ButtonChangeName;
         private System.Windows.Forms.ListBox ListBoxPlayers;
         private System.Windows.Forms.Button ButtonEndTurn;
+        private System.Windows.Forms.Label LabelSaboteur;
     }
 }
 

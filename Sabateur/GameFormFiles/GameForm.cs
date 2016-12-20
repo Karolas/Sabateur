@@ -44,6 +44,10 @@ namespace Sabateur
                 {
                     Game.SqlWorker.GetData();
                     Game.InitiateControl();
+
+                    if (Game.Players.Where(player => player.Name == Game.Player.Name).First().IsSabateur) LabelSaboteur.Text = "Saboteur";
+                    else LabelSaboteur.Text = "Miner";
+
                     ShowField();
                     ShowHand();
                 }
@@ -89,6 +93,14 @@ namespace Sabateur
                 Game.AssignRandomCard(players[i].Name);
                 Game.AssignRandomCard(players[i].Name);
             }
+
+            Game.SqlWorker.SaveData();
+
+            for(int i = 0; i < (int)(((float)players.Count() / 3) + 0.5); i++)
+            {
+                Game.AssignRandomSaboteur();
+            }
+
             Game.SqlWorker.ReturnData();
         }
 

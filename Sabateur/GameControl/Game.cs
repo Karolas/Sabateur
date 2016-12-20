@@ -102,6 +102,18 @@ namespace Sabateur
             Cards.RemoveRange(Cards);
         }
 
+        public static void AssignRandomSaboteur()
+        {
+            List<PlayerSet> players = Players.Where(player => player.Name != "Deck" &&
+                                                              player.Name != "Field" &&
+                                                              player.Name != "Graveyard" &&
+                                                              player.IsSabateur == false).ToList();
+
+            players[RandNumGen.Next(0, players.Count - 1)].IsSabateur = true;
+
+            SqlWorker.SaveData();
+        }
+
         private static PlayerSet CratePlayer(string name)
         {
             PlayerSet deck = new PlayerSet();
