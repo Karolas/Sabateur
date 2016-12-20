@@ -66,24 +66,6 @@ namespace Sabateur
             Game.Players = db.PlayerSet;
         }
 
-        public void SaveDataCards()
-        {
-            db.CardSet = Game.Cards;
-
-            db.SaveChanges();
-
-            Game.Cards = db.CardSet;
-        }
-
-        public void SaveDataPlayers()
-        {
-            db.PlayerSet = Game.Players;
-
-            db.SaveChanges();
-
-            Game.Players = db.PlayerSet;
-        }
-
         public void ReturnData()
         {
             db.CardSet = Game.Cards;

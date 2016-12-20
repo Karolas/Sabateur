@@ -9,6 +9,7 @@ namespace Sabateur
     interface IDataWorker
     {
         void GetData();
+        void SaveData();
         void ReturnData();
     }
 }
