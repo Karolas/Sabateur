@@ -83,25 +83,24 @@
     <Compile Include="CardSet.cs">
       <DependentUpon>GameDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CardSpriteGenerator.cs" />
+    <Compile Include="GameControl\CardSpriteGenerator.cs" />
     <Compile Include="CardStatus.cs">
       <DependentUpon>GameDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CardType.cs">
       <DependentUpon>GameDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Deck.cs" />
+    <Compile Include="GameAssets\Deck.cs" />
     <Compile Include="Direction.cs">
       <DependentUpon>GameDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="FieldTileClickMethods.cs" />
     <Compile Include="GameFormFiles\GameForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GameFormFiles\GameForm.Designer.cs">
       <DependentUpon>GameForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Game.cs" />
+    <Compile Include="GameControl\Game.cs" />
     <Compile Include="GameDBDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -134,15 +133,15 @@
     <Compile Include="GameFormFiles\GameFormTileSelect.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IDataWorker.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="GameControl\DataWorkers\IDataWorker.cs" />
+    <Compile Include="GameAssets\Player.cs" />
     <Compile Include="PlayerSet.cs">
       <DependentUpon>GameDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="PlayerSetMod.cs" />
+    <Compile Include="GameAssets\PlayerSetMod.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlDataWorker.cs" />
+    <Compile Include="GameControl\DataWorkers\Implementations\SqlDataWorker.cs" />
     <EmbeddedResource Include="GameFormFiles\GameForm.resx">
       <DependentUpon>GameForm.cs</DependentUpon>
     </EmbeddedResource>
